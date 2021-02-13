@@ -43,9 +43,6 @@ require('./routes/auth.routes')(app)
 require('./routes/profile.routes')(app)
 require('./routes/bread.routes')(app)
 // catchall 404 page
-app.get('/*',(req,res)=>{
-  res.send({data: '404'})
-})
 
 
 // Start the app

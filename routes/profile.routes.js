@@ -1,8 +1,16 @@
 const controller = require('../controllers/profile.controller')
-const isLoggedIn = require('../middleware/isLoggedIn');
+
 
 
 module.exports = function(app){
-  app.get('/profile',isLoggedIn, controller.getprofile)
-  app.delete('/profile', isLoggedIn, controller.deleteAccount)
+  app.use( (req, res, next) => {
+        // set header and allow use of x access token ( we will use this to pass our token )
+        res.header(
+            "Access-Control-Allow-Headers",
+            "x-access-token, Origin, Content-type, Accept"
+        );
+        next();
+    })
+  app.get('/profile', [authJwt.verifyWebToken],controller.getprofile)
+  app.delete('/profile', [authJwt.verifyWebToken],controller.deleteAccount)
 }

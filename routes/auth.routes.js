@@ -1,8 +1,15 @@
 const controller = require('../controllers/auth.controller')
-const isLoggedIn = require('../middleware/isLoggedIn');
 
 module.exports = function(app) {
+  app.use( (req,res, next) => {
+        // set header and allow use of x access token ( we will use this to pass our token )
+        res.header(
+            "Access-Control-Allow-Headers",
+            "x-access-token, Origin, Content-type, Accept"
+        );
+        next();
+    })
+
   app.post('/auth/signup', controller.signup)
   app.post('/auth/login', controller.login)
-  app.get('/auth/logout', isLoggedIn ,controller.logout)
 }

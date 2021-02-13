@@ -1,8 +1,9 @@
 const db = require('../models')
 
-exports.home = (req,res) => {
-  // db.breads.findAll
+exports.home = async (req,res) => {
+  const breads = await db.breads.findAll()
   // send all, send also current user if it's there
+  res.send({data: breads})
 }
 
 exports.createBread = async (req,res) => {
@@ -13,6 +14,7 @@ exports.createBread = async (req,res) => {
       imageurl: req.body.imageurl,
       userbakerId: res.locals.currentUser.id
     })
+    console.log(req.body.allergens)
     res.send({data: createdBread})
   } catch(err){
     console.log(err)
@@ -21,4 +23,10 @@ exports.createBread = async (req,res) => {
 }
 
 exports.getBreadDetails = (req,res) =>{
+  try {
+
+  } catch(err){
+    console.log(err)
+    res.status(500).send({message: err.message})
+  }
 }
