@@ -47,9 +47,18 @@ app.get('/*',(req,res)=>{
   res.send({data: '404'})
 })
 
+const seed = require('./seed.js')
 // Start the app
 const port = process.env.PORT || 3000
 app.listen(port,()=>{
   console.log(`listening on port ${port}`)
+  db.allergen.findAll().then(allergen=>{
+    if (allergen.length === 0){
+      console.log('seeding database')
+      db.allergen.bulkCreate(seed).then((data)=>{
+        console.log('seeded database')
+      })
+    }
+  })
   // check if allergens in database, if not seed the database.
 })
