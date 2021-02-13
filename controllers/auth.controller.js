@@ -21,7 +21,6 @@ exports.signup = (req, res) => {
 }
 
 
-
 exports.login = passport.authenticate('local',{
     failureRedirect: '/auth/login',
     successRedirect: '/',
@@ -29,10 +28,7 @@ exports.login = passport.authenticate('local',{
   })
 
 
-
 exports.logout  = (req,res)=>{
   req.logout();
-  // req.flash('success','You are now logged out!')
-  console.log('logged out')
   res.send({message: 'you are now logged out'})
 }
