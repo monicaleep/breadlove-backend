@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.user.hasMany(models.bread)
+      models.userbaker.hasMany(models.bread)
 
     }
   };
@@ -56,6 +56,7 @@ module.exports = (sequelize, DataTypes) => {
 
 
   userbaker.addHook('beforeCreate',async (pendingUser,options)=>{
+    console.log(pendingUser)
     await bcrypt.hash(pendingUser.password,10)
     .then(hashedPassword=>{
       //console.log(hashedPassword);

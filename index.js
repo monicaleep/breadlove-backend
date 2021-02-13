@@ -5,17 +5,12 @@ const app = express();
 const cors = require('cors')
 const session = require('express-session')
 const passport = require('./config/ppConfig.js')
+const bodyParser = require('body-parser')
 const isLoggedIn = require('./middleware/isLoggedIn')
-const methodOverride = require('method-override');
 app.use(cors())
 
-
-app.use(express.urlencoded({ extended: false })) // to use the body parser
-app.use(express.static(__dirname + '/public/')) //to use the css files
-app.use(methodOverride('_method')); // for put and delete
-
-
-
+app.use(bodyParser.json()) //parse requests of content type application/json
+app.use(bodyParser.urlencoded({ extended: true })) // parse request of content type = application/x-www-form-urlencoded
 
 
 // session configuration
@@ -46,7 +41,7 @@ app.use('/auth',require('./controllers/auth.controller'));
 
 // Index route - render the home page
 app.get('/',(req,res)=>{
-    res.render('home')
+    res.send({data: res.locals.currentUser})
 })
 
 // catchall 404 page

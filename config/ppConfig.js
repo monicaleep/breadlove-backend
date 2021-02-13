@@ -9,7 +9,7 @@ passport.serializeUser((user,doneCallback)=>{
 });
 
 passport.deserializeUser((id, doneCallback)=>{
-  db.user.findByPk(id)
+  db.userbaker.findByPk(id)
   .then(foundUser=>{
     console.log('deserializing user...');
     doneCallback(null,foundUser)
@@ -19,27 +19,6 @@ passport.deserializeUser((id, doneCallback)=>{
   })
 })
 
-// const fieldsToCheck = {
-//   usernameField: 'email',
-//   passwordField: 'password'
-// }
-//
-// const findAndLoginUser = (email, password, doneCallback) =>{
-//   db.user.findOne({where: {email}})
-//   .then(async foundUser=>{
-//      let match = await foundUser.validPassword(password)
-//     if(!foundUser || !match){  // something wrong with the user
-//       console.log('hit this route')
-//       return doneCallback(null,false) //send back false
-//     } else { //user was legit
-//       return doneCallback(null, foundUser) //send the user object
-//     }
-//   })
-//   .catch(err=>doneCallback(err)
-//   )
-// }
-
-//const strategy = new LocalStrategy(fieldsToCheck, findAndLoginUser)
 
 // passport.use(strategy)
 passport.use(new LocalStrategy({
@@ -48,7 +27,7 @@ passport.use(new LocalStrategy({
     },
     (email, password, doneCallback) => {
         console.log("passport-local is now trying to authenticate this user:", email)
-        db.user.findOne({where:{email:email}})
+        db.userbaker.findOne({where:{email:email}})
         .then( async foundUser=>{
           let match;
           if (foundUser){
