@@ -46,7 +46,7 @@ app.get('/',(req,res)=>{
 
 // catchall 404 page
 app.get('/*',(req,res)=>{
-  res.render('404')
+  res.send({data: '404'})
 })
 
 // Start the app

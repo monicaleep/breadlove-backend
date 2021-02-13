@@ -22,7 +22,7 @@ router.post('/signup',(req,res)=>{
       res.send({message: 'A user associated with that email already exists'}) // redirect to login page
     } else{
       passport.authenticate('local',{
-        // successRedirect: '/',
+        successRedirect: '/',
         // successFlash: 'Account created'
       })(req,res) //IIFE
     }

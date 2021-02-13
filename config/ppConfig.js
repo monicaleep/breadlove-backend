@@ -39,7 +39,9 @@ passport.use(new LocalStrategy({
                 return doneCallback(null, foundUser);
             }
         })
-        .catch(err=>doneCallback(err))
+        .catch(err=>{
+          console.log(err)
+          return doneCallback(err)})
     }
 ))
 
