@@ -33,15 +33,10 @@ app.use((req,res,next)=>{
   next();
 })
 
-//controllers middleware
-// app.use('/auth',require('./controllers/auth.controller'));
-// app.use('/entry',require('./controllers/entry'))
-// app.use('/todo',require('./controllers/todo'))
-// app.use('/profile',require('./controllers/profile'))
 
 // Index route - render the home page
 app.get('/',(req,res)=>{
-    res.send({data: res.locals.currentUser})
+    res.send({data: res.locals.currentUser.userId})
 })
 
 require('./routes/auth.routes')(app)
