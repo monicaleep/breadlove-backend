@@ -46,6 +46,7 @@ app.get('/',(req,res)=>{
 
 require('./routes/auth.routes')(app)
 require('./routes/profile.routes')(app)
+require('./routes/bread.routes')(app)
 // catchall 404 page
 app.get('/*',(req,res)=>{
   res.send({data: '404'})
@@ -55,4 +56,5 @@ app.get('/*',(req,res)=>{
 const port = process.env.PORT || 3000
 app.listen(port,()=>{
   console.log(`listening on port ${port}`)
+  // check if allergens in database, if not seed the database.
 })

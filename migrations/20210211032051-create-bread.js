@@ -14,7 +14,7 @@ module.exports = {
       description: {
         type: Sequelize.TEXT
       },
-      bakerId: {
+      userbakerId: {
         type: Sequelize.INTEGER
       },
       imageurl: {

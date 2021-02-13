@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   bread.init({
     name: DataTypes.STRING,
     description: DataTypes.TEXT,
-    bakerId: DataTypes.INTEGER,
+    userbakerId: DataTypes.INTEGER,
     imageurl: DataTypes.STRING
   }, {
     sequelize,
