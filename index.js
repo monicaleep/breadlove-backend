@@ -34,7 +34,7 @@ app.use((req,res,next)=>{
 })
 
 //controllers middleware
-app.use('/auth',require('./controllers/auth.controller'));
+// app.use('/auth',require('./controllers/auth.controller'));
 // app.use('/entry',require('./controllers/entry'))
 // app.use('/todo',require('./controllers/todo'))
 // app.use('/profile',require('./controllers/profile'))
@@ -44,6 +44,7 @@ app.get('/',(req,res)=>{
     res.send({data: res.locals.currentUser})
 })
 
+require('./routes/auth.routes')(app)
 // catchall 404 page
 app.get('/*',(req,res)=>{
   res.send({data: '404'})

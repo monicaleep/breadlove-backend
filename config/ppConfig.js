@@ -26,7 +26,7 @@ passport.use(new LocalStrategy({
         passwordField: 'password'
     },
     (email, password, doneCallback) => {
-        console.log("passport-local is now trying to authenticate this user:", email)
+        // console.log("passport-local is now trying to authenticate this user:", email)
         db.userbaker.findOne({where:{email:email}})
         .then( async foundUser=>{
           let match;
