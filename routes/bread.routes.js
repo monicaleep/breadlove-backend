@@ -1,5 +1,5 @@
 const controller = require('../controllers/bread.controller')
-const { authJwt } = require('../middlewares')
+const { authJwt } = require('../middleware')
 
 module.exports = function(app) {
   app.use( (req, res, next) => {

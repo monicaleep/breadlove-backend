@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken')
 const config = require("../config/auth.config")
-const db = require('../models')
-const User = db.user
+
 
 // This function will verify our web token
 verifyWebToken = (req, res, next) => {
@@ -15,6 +14,7 @@ verifyWebToken = (req, res, next) => {
     // We try to verify the token
     jwt.verify(token, config.secret, (err, decoded) => {
         if (err){
+          console.log(err)
             return res.status(401).send({message: "Unauthorized"})
         }
         // set userid to decoded id.

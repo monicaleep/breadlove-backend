@@ -1,5 +1,5 @@
 const controller = require('../controllers/profile.controller')
-
+const { authJwt, verifySignup } = require('../middleware')
 
 
 module.exports = function(app){
