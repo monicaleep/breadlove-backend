@@ -12,7 +12,7 @@ exports.signup = (req, res) => {
   })
   .then(([createdUser,created])=>{
     if(!created){  //if the user was not created cos email already exists
-      return res.status(400).send({message: 'A user associated with that email already exists'}) // redirect to login page
+      return res.status(400).send({message: 'A user associated with that email already exists'}) 
     } else{
       // TODO add jwt on here?
       return res.status(200).send({message: 'User created successfully'})
@@ -44,4 +44,3 @@ exports.login = async (req,res) => {
     return res.status(500).send({message: err.message})
   }
 }
-// exports.login = passport.authenticate('local',{ })

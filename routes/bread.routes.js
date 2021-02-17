@@ -14,5 +14,8 @@ module.exports = function(app) {
   app.get('/', [authJwt.verifyWebToken],controller.home)
   app.post('/bread', [authJwt.verifyWebToken],controller.createBread)
   app.get('/bread/:id' ,[authJwt.verifyWebToken],controller.showBreadDetails)
+  app.delete('/bread/:id' ,[authJwt.verifyWebToken],controller.deleteBread)
+  app.put('/bread/:id' ,[authJwt.verifyWebToken],controller.editBread)
   app.post('/bread/:id/comment',[authJwt.verifyWebToken],controller.addComment)
+  app.delete('/bread/:id/comment',[authJwt.verifyWebToken],controller.deleteComment)
 }

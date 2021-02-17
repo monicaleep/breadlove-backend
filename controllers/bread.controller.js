@@ -16,7 +16,7 @@ exports.createBread = async (req,res) => {
       userbakerId: req.userId
     })
     if(req.body.allergens){
-
+      // todo add allergens if they exist
       console.log(req.body.allergens)
     }
     res.send({data: createdBread})

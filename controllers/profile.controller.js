@@ -7,9 +7,17 @@ exports.getprofile = async (req,res) => {
   // db.bread.findAll({where: {bakerId: res.locals.currentUser.id}})
 }
 
-exports.deleteAccount = (req,res) => {
-  // TODO 
-  // delete user
-  // logout
+exports.deleteAccount = async (req,res) => {
+  // TODO - check if deletes assocated 'bread' based on cascade in model
+  try{
+    await db.userbaker.destroy({
+      where: {
+        id: req.userId
+      }
+    })
+    res.status(200).send({message: 'Successfully deleted user'})
+  } catch(err){
+    res.status(500).send({message: err.message})
+  }
 
 }
