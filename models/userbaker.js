@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.userbaker.hasMany(models.bread)
+      models.userbaker.hasMany(models.bread, {onDelete: 'CASCADE'})
 
     }
   };

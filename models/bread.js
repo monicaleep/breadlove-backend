@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.bread.belongsTo(models.userbaker)
       models.bread.belongsToMany(models.allergen, {through : 'allergenbread'})
-      models.bread.hasMany(models.comment)
+      models.bread.hasMany(models.comment, {onDelete: 'CASCADE'})
     }
   };
   bread.init({

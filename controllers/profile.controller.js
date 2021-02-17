@@ -1,13 +1,14 @@
 const db = require('../models')
 
 
-exports.getprofile = (req,res) => {
-  res.send({data:req.userId})
+exports.getprofile = async (req,res) => {
+  const user = await db.userbaker.findByPk(req.userId,{include: [db.bread]})
+  res.send({data:user})
   // db.bread.findAll({where: {bakerId: res.locals.currentUser.id}})
 }
 
 exports.deleteAccount = (req,res) => {
-  // delete all breads where id:userid
+  // TODO 
   // delete user
   // logout
 
