@@ -11,6 +11,9 @@ module.exports = function(app){
         );
         next();
     })
+
+  // GET - Get profile information  
   app.get('/profile', [authJwt.verifyWebToken],controller.getprofile)
+  // DESTROY - Delete profile
   app.delete('/profile', [authJwt.verifyWebToken],controller.deleteAccount)
 }

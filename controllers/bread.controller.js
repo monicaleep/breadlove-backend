@@ -66,7 +66,6 @@ exports.deleteBread =  async (req,res) => {
   } else {
     return res.status(403).send({message: 'you can only delete breads that you own!'})
   }
-  // breadtodelete.getuserbaker()
 }
 
 exports.editBread = async (req,res) => {
@@ -75,5 +74,6 @@ exports.editBread = async (req,res) => {
 
 
 exports.deleteComment = async (req,res)=>{
-
+  await db.comment.destroy({where : {id: req.params.commentid}})
+  return res.status(200).send({message: 'successfully deleted your comment'})
 }

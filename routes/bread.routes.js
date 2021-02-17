@@ -10,12 +10,18 @@ module.exports = function(app) {
         );
         next();
     })
-
+  // GET all breads INDEX
   app.get('/', [authJwt.verifyWebToken],controller.home)
+  // POST - CREATE a new Bread
   app.post('/bread', [authJwt.verifyWebToken],controller.createBread)
+  // SHOW - View details on a specific bread
   app.get('/bread/:id' ,[authJwt.verifyWebToken],controller.showBreadDetails)
+  // DESTROY - delete a bread
   app.delete('/bread/:id' ,[authJwt.verifyWebToken],controller.deleteBread)
+  // EDIT - Update a bread
   app.put('/bread/:id' ,[authJwt.verifyWebToken],controller.editBread)
+  // POST - Add a comment to a bread
   app.post('/bread/:id/comment',[authJwt.verifyWebToken],controller.addComment)
+  //DELETE - Remove a comment from a bread
   app.delete('/bread/:id/comment/:commentid',[authJwt.verifyWebToken],controller.deleteComment)
 }
