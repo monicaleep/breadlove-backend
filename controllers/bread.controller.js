@@ -4,7 +4,7 @@ exports.home = async (req,res) => {
   const breads = await db.breads.findAll({include: [db.comment]})
   // send all, send also current user if it's there
   // include allergens
-  res.send({data: breads})
+  return res.send({breads})
 }
 
 exports.createBread = async (req,res) => {
@@ -19,10 +19,10 @@ exports.createBread = async (req,res) => {
       // todo add allergens if they exist
       console.log(req.body.allergens)
     }
-    res.send({data: createdBread})
+    return res.send({createdBread})
   } catch(err){
     console.log(err)
-    res.status(500).send({message: err.message})
+    return res.status(500).send({message: err.message})
   }
 }
 
@@ -36,7 +36,7 @@ exports.showBreadDetails = async (req,res) =>{
     }
   } catch(err){
     console.log(err)
-    res.status(500).send({message: err.message})
+    return res.status(500).send({message: err.message})
   }
 }
 
@@ -48,16 +48,32 @@ exports.addComment = async (req,res) => {
       body: req.body.body,
       breadId: req.params.id
     })
-    res.status(200).send({message: "Comment created successfully"})
+    return res.status(200).send({message: "Comment created successfully"})
   }catch(err){
-    res.status(500).send({message: err.message})
+    return res.status(500).send({message: err.message})
   }
 }
 
-exports.deleteBread = async (req,res) => {
-  // TODO
+// Deletes an entry from Bread table based on req.param.id
+exports.deleteBread =  async (req,res) => {
+  console.log('delete')
+  console.log(req.userId)
+  const breadtodelete = await db.bread.findByPk(req.params.id)
+  if (breadtodelete.userbakerId === req.userId){
+    console.log(true)
+    await breadtodelete.destroy()
+    return res.send({message: 'successfully deleted'})
+  } else {
+    return res.status(403).send({message: 'you can only delete breads that you own!'})
+  }
+  // breadtodelete.getuserbaker()
 }
 
 exports.editBread = async (req,res) => {
   // TODO
+}
+
+
+exports.deleteComment = async (req,res)=>{
+
 }

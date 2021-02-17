@@ -17,5 +17,5 @@ module.exports = function(app) {
   app.delete('/bread/:id' ,[authJwt.verifyWebToken],controller.deleteBread)
   app.put('/bread/:id' ,[authJwt.verifyWebToken],controller.editBread)
   app.post('/bread/:id/comment',[authJwt.verifyWebToken],controller.addComment)
-  app.delete('/bread/:id/comment',[authJwt.verifyWebToken],controller.deleteComment)
+  app.delete('/bread/:id/comment/:commentid',[authJwt.verifyWebToken],controller.deleteComment)
 }
