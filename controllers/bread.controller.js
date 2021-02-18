@@ -8,8 +8,9 @@ exports.home = async (req,res) => {
       attributes: {
         include: [[sequelize.fn("COUNT", sequelize.col('comments.id')),'commentCount']]
       },
-      include: [{model:db.comment, attributes: []
-      }],
+      include: [
+        { model:db.comment, attributes: [] }
+      ],
       group: ['bread.id']
     })
     // send all, send also current user if it's there
