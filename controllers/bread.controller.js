@@ -1,10 +1,15 @@
 const db = require('../models')
 
 exports.home = async (req,res) => {
-  const breads = await db.breads.findAll({include: [db.comment]})
-  // send all, send also current user if it's there
-  // include allergens
-  return res.send({breads})
+  try{
+    const breads = await db.bread.findAll({include: [db.comment]})
+    // send all, send also current user if it's there
+    // include allergens
+    return res.send({breads})
+
+  } catch(err){
+    res.status(500).send({message: err.message})
+  }
 }
 
 exports.createBread = async (req,res) => {
@@ -98,7 +103,6 @@ exports.deleteComment = async (req,res)=>{
   try{
     await db.comment.destroy({where : {id: req.params.commentid, userbakerId: req.userId}})
     return res.status(200).send({message: 'successfully deleted your comment'})
-
   }catch(err){
     return res.status(500).send({message: "Server Error"})
   }

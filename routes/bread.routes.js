@@ -10,8 +10,8 @@ module.exports = function(app) {
         );
         next();
     })
-  // GET all breads INDEX
-  app.get('/', [authJwt.verifyWebToken],controller.home)
+  // GET all breads INDEX, not a protexted route
+  app.get('/',controller.home)
   // POST - CREATE a new Bread
   app.post('/bread', [authJwt.verifyWebToken],controller.createBread)
   // SHOW - View details on a specific bread
