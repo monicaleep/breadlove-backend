@@ -46,7 +46,8 @@ exports.addComment = async (req,res) => {
     const comment = db.comment.create({
       author: req.body.author,
       body: req.body.body,
-      breadId: req.params.id
+      breadId: req.params.id,
+      userbakerId: req.userId
     })
     return res.status(200).send({message: "Comment created successfully"})
   }catch(err){
@@ -56,24 +57,49 @@ exports.addComment = async (req,res) => {
 
 // Deletes an entry from Bread table based on req.param.id
 exports.deleteBread =  async (req,res) => {
-  console.log('delete')
-  console.log(req.userId)
-  const breadtodelete = await db.bread.findByPk(req.params.id)
-  if (breadtodelete.userbakerId === req.userId){
-    console.log(true)
-    await breadtodelete.destroy()
-    return res.send({message: 'successfully deleted'})
-  } else {
-    return res.status(403).send({message: 'you can only delete breads that you own!'})
+  try{
+    const breadtodelete = await db.bread.findByPk(req.params.id)
+    if(!breadtodelete){
+      return res.status(404).send({message: "Bread not found!"})
+    }
+    else if (breadtodelete.userbakerId === req.userId){
+      await breadtodelete.destroy()
+      return res.send({message: 'successfully deleted'})
+    } else {
+      return res.status(403).send({message: 'you can only delete breads that you own!'})
+    }
+  } catch(err){
+    return res.status(500).send({message: 'Server Error'})
   }
 }
 
 exports.editBread = async (req,res) => {
-  // TODO
+  try{
+    const updatedQuery = db.bread.update({
+      name: req.body.name,
+      description: req.body.description,
+      imageurl: req.body.imageurl,
+    },{
+      where: {
+        id: req.params.id,
+        userbakerId: req.userId
+      }
+    })
+    console.log(updatedQuery)
+    return res.status(200).send(updatedQuery)
+  }catch(err){
+    return res.status(500).send({message: err.message})
+  }
 }
 
 
 exports.deleteComment = async (req,res)=>{
-  await db.comment.destroy({where : {id: req.params.commentid}})
-  return res.status(200).send({message: 'successfully deleted your comment'})
+  // find comment and check if author is user
+  try{
+    await db.comment.destroy({where : {id: req.params.commentid, userbakerId: req.userId}})
+    return res.status(200).send({message: 'successfully deleted your comment'})
+
+  }catch(err){
+    return res.status(500).send({message: "Server Error"})
+  }
 }
