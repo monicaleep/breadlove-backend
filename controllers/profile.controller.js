@@ -6,7 +6,6 @@ exports.getprofile = async (req,res) => {
     const user = await db.userbaker.findByPk(req.userId,{include: [db.bread]})
     if(user){
       return res.send(user)
-
     } else{
       return res.status(404).send({message: 'User not found'})
     }
@@ -27,5 +26,4 @@ exports.deleteAccount = async (req,res) => {
   } catch(err){
     return res.status(500).send({message: err.message})
   }
-
 }

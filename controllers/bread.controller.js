@@ -1,14 +1,23 @@
 const db = require('../models')
+const sequelize = require('sequelize')
 
 exports.home = async (req,res) => {
   try{
-    const breads = await db.bread.findAll({include: [db.comment]})
+    // get all the bread, and include the number of comments on each one!
+    const breads = await db.bread.findAll({
+      attributes: {
+        include: [[sequelize.fn("COUNT", sequelize.col('comments.id')),'commentCount']]
+      },
+      include: [{model:db.comment, attributes: []
+      }],
+      group: ['bread.id']
+    })
     // send all, send also current user if it's there
-    // include allergens
+    // include allergens TODO
     return res.send({breads})
 
   } catch(err){
-    res.status(500).send({message: err.message})
+    return res.status(500).send({message: err.message})
   }
 }
 
@@ -40,7 +49,6 @@ exports.showBreadDetails = async (req,res) =>{
       return res.status(200).send(foundBread)
     }
   } catch(err){
-    console.log(err)
     return res.status(500).send({message: err.message})
   }
 }
