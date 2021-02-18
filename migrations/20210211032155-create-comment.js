@@ -8,6 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      userbakerId:{
+        type: Sequelize.INTEGER
+      },
       author: {
         type: Sequelize.STRING
       },
