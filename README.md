@@ -46,6 +46,8 @@ Find the frontend app [here](https://github.com/monicaleep/Breadlove-frontend)
   * CORS
 
 ### general approach (a couple paragraphs)
+Bread the Love is an app which allows you to share your baked good creations with the world. You can view baked goods without having an account, but to comment or add your own, you must sign up. Once you have an account you can add you own baked good, including a photo, name and description. Then other users can comment and you can comment on theirs. 
+
 The app requires a direct relationship between data tables, for that reason a SQL database was chosen to hold the data over a NoSQL database. JWT were used for authorization.
 
 ### installation instructions:
