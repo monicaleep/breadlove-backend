@@ -1,20 +1,50 @@
 # Bread The Love - Backend App
 Find the frontend app [here](https://github.com/monicaleep/Breadlove-frontend)
-Routes:
+
+
+## RESTful Routes:
+
 [LucidChart ORM](https://lucid.app/lucidchart/invitations/accept/ae319f4e-0212-4a7a-bf06-16e8420237fa)
 
 
-
-
-
-
+| Verb | Endpoint | Action |
+| ----------- | ----------- | ----------- |
+| GET | '/' | Home page, returns all existing baked goods and how many comments each one received |
+| ------ | ----------- | ----------- |
+| POST | '/auth/login' | Signin page post route |
+| POST | '/auth/signup' | Signup page post route |
+| ------ | ----------- | ----------- |
+| GET | '/profile'  | View your own profile  - index shows your info and list of all the baked goods you've made|
+| DELETE | '/profile'  | Delete your own profile |
+| ------ | ----------- | ----------- |
+| POST | '/bread/' | Add a baked good|
+| DELETE | '/bread/:id' | Delete a baked good |
+| POST | '/bread/:id/comment' | Add a comment on an existing baked good|
+| GET | '/bread/:id' | Get more information on a single baked good (includes comments) |
+| PUT | '/bread/:id' | Update information on a baked good |
 
 
 
 
 ### explanation of backend tech used
-- Node packages: Express, dotenv,  jwt,  bcrypt, pg, sequelize
-- Postgres database connected via Sequelize ORM.
+* **RUNTIME ENVIRONMENT**
+
+  * Node.js
+
+* **FRAMEWORK**
+
+  * Express
+
+* **DATABASE**
+
+  * Postgres / Sequelize
+
+* **Auth/Security**
+
+  * bcryptjs
+  * JSON web tokens
+  * CORS
+
 ### general approach (a couple paragraphs)
 The app requires a direct relationship between data tables, for that reason a SQL database was chosen to hold the data over a NoSQL database. JWT were used for authorization.
 
@@ -59,8 +89,7 @@ sequelize db:migrate
 
 
 
-### table with RESTful routes & resources available at each endpoint
-
 ### unsolved problems / major hurdles
+- Adding the allergen data via a join table will be my next step.  I have already seeded allergen data but I need to update the create/edit routes to join with the bread data.
 
 ### link to deployed api
