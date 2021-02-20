@@ -57,10 +57,8 @@ module.exports = (sequelize, DataTypes) => {
 
 
   userbaker.addHook('beforeCreate',async (pendingUser,options)=>{
-    console.log(pendingUser)
     await bcrypt.hash(pendingUser.password,10)
     .then(hashedPassword=>{
-      //console.log(hashedPassword);
       pendingUser.password = hashedPassword;
     })
   })
@@ -68,7 +66,6 @@ module.exports = (sequelize, DataTypes) => {
   userbaker.prototype.validPassword = async function(passwordInput){
     try{
       let match = await bcrypt.compare(passwordInput, this.password);
-      //console.log("?????????????????match: ",match)
       return match;
     }  catch(error){
       console.log(error)

@@ -36,7 +36,6 @@ exports.createBread = async (req,res) => {
     }
     return res.send({createdBread})
   } catch(err){
-    console.log(err)
     return res.status(500).send({message: err.message})
   }
 }
@@ -57,7 +56,7 @@ exports.showBreadDetails = async (req,res) =>{
 
 exports.addComment = async (req,res) => {
   try{
-    const comment = db.comment.create({
+    const comment = await db.comment.create({
       author: req.body.author,
       body: req.body.body,
       breadId: req.params.id,
@@ -99,7 +98,6 @@ exports.editBread = async (req,res) => {
         userbakerId: req.userId
       }
     })
-    console.log(updatedQuery)
     return res.status(200).send(updatedQuery)
   }catch(err){
     return res.status(500).send({message: err.message})
