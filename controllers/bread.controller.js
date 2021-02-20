@@ -43,7 +43,7 @@ exports.createBread = async (req,res) => {
 
 exports.showBreadDetails = async (req,res) =>{
   try {
-    foundBread = await db.bread.findAll({where: {id:req.params.id},include: [db.comment]})
+    foundBread = await db.bread.findOne({where: {id:req.params.id},include: [db.comment]})
     if (!foundBread){
       return res.status(404).send({message: 'Not found'})
     } else {
