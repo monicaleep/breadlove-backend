@@ -63,7 +63,7 @@ exports.addComment = async (req,res) => {
       breadId: req.params.id,
       userbakerId: req.userId
     })
-    return res.status(200).send({message: "Comment created successfully"})
+    return res.status(200).send(comment)
   }catch(err){
     return res.status(500).send({message: err.message})
   }
